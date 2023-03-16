@@ -55,7 +55,7 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: 'list down user details',
-    handler(argv) {
+    handler() {
         db.listUser();
     }
 });
@@ -67,13 +67,11 @@ yargs.command({
     describe: 'update user details',
     builder: {
         id: {
-            describe: 'User ID',
-            demandOption: true,
+            describe: 'User name',
             type: 'number',
         },
         name: {
             describe: 'User name',
-            demandOption: true,
             type: 'string',
         },
         address: {
@@ -89,6 +87,7 @@ yargs.command({
             type: 'string',
         }
     },
+    
     handler(argv) {
         db.updateUser(argv.id, argv.name, argv.address, argv.telno, argv.visitDate);
     }
@@ -96,7 +95,7 @@ yargs.command({
 
 //remove user details
 yargs.command({
-    command: 'read',
+    command: 'remove',
     describe: 'Read user Details',
     builder: {
         id: {
@@ -111,7 +110,23 @@ yargs.command({
     }
 });
 
+//read user details
+yargs.command({
+    command: 'read',
+    describe: 'Read user Details',
+    builder: {
+        id: {
+            describe: 'User ID',
+            demandOption: true,
+            type: 'number',
+        },
+
+    },
+    handler(argv) {
+        db.readUser(argv.id);
+    }
+});
+
 
 
 yargs.parse();
-

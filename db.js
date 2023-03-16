@@ -16,6 +16,7 @@ const addUser = (name, address, telno, visitDate) => {
          id = userData[length - 1].id + 1;
      }
 
+
     userData.push({
         id,
         name,
@@ -31,35 +32,74 @@ const addUser = (name, address, telno, visitDate) => {
 
 //read user Details
 const readUser = (id) => {
-    console.log(chalk.yellow('Read user', id))
+    
+    const users = loadUserData();
+    const user = users.find((user) => {
+        return user.id === id;
+    });
+
+    if (user) {
+        console.log(chalk.yellow('User details of user ID:', id));
+        console.log(user);
+        
+    } else {
+        console.log(chalk.bgRed('  User details not found...!  '));
+    };
+
+
+    
 };
 
 //list user Details
 const listUser = () => {
-    console.log(chalk.orange('Read user', id))
+    console.log(chalk.magenta('List  user'))
+
+    const user = loadUserData();
+    user.forEach((user)=>{
+        console.log(user);
+    });
+    
+
 };
 
 //update user Details
-const updateUser = (id) => {
+const updateUser = (id,name, address, telno, visitDate) => {
     console.log(chalk.cyan('Update user', id))
+
+    const userData = loadUserData();
+    // const userIndex = userData.findIndex((user)=>user.id===id);
+    // console.log(userIndex);
 };
 
 //remove user 
 const removeUser = (id) => {
-    console.log(chalk.red('Remove  user', id))
+
+    const users = loadUserData();
+    const newUsers = users.filter((user) => {
+        return user.id != id;
+    });
+
+    if(users.length > newUsers.length){
+        saveUser(newUsers);
+        console.log(chalk.bgGreenBright('User details removed successfully...!'));
+    } else {
+        console.log(chalk.bgRed('  User details not found...!  '));
+    }
 
 };
 
 
 const saveUser = (user) => {
     const dataJSON = JSON.stringify(user);
-    fs.appendFileSync(dataFile, dataJSON+'\n');
-};
+    fs.writeFileSync(dataFile,dataJSON);
+}
+
+
 
 
 const loadUserData = () => {
     try {
-        const dataBuffer = fs.readFileSync('');
+        const dataBuffer = fs.readFileSync(dataFile);
         const dataJSON = dataBuffer.toString();
         const data = JSON.parse(dataJSON);
         return data;
@@ -69,6 +109,7 @@ const loadUserData = () => {
     
 
 };
+
 
 
 
