@@ -64,11 +64,30 @@ const listUser = () => {
 
 //update user Details
 const updateUser = (id,name, address, telno, visitDate) => {
-    console.log(chalk.cyan('Update user', id))
+    
 
     const userData = loadUserData();
-    // const userIndex = userData.findIndex((user)=>user.id===id);
-    // console.log(userIndex);
+    const userIndex = userData.findIndex((user)=>user.id===id);
+    //console.log(userIndex);
+
+    if(userIndex != -1){
+        const user = userData[userIndex];
+        
+        user.name = name ? name : user.name;
+        user.address = address ? address : user.address;
+        user.telno = telno ? telno : user.telno;
+        user.visitDate = visitDate ? visitDate : user.visitDate;
+
+        console.log(chalk.cyan('Succsesfully Updated user:', id))
+        saveUser(userData);
+    }
+    else {
+        console.log(chalk.bgRed('  User details not found...!  '));
+    }
+
+    
+
+
 };
 
 //remove user 
