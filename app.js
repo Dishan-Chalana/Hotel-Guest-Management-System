@@ -99,7 +99,7 @@ yargs.command({
 //remove user details
 yargs.command({
     command: 'remove',
-    describe: 'Read user details',
+    describe: 'Remove user details',
     builder: {
         id: {
             describe: 'User ID',
