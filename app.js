@@ -2,9 +2,12 @@ const db = require('./db.js');
 const yargs = require('yargs');
 const chalk = require('chalk');
 
-//hest -id , name , address , telno
-// --name="Dishan" --address="Galle" --telno="0754455835"
 
+ console.log(chalk.bgBlue.bold('------  Welcome to Hotel Guest Management System  ------'));
+ console.log(chalk.blue.bold.underline('\nuser functions:'), chalk.yellow('\nadd \nread \nlist \nupdate \nremove \nhelp \n'));
+ 
+
+    
 //add user Details
 yargs.command({
     command: 'add',
@@ -54,7 +57,7 @@ yargs.command({
 //list user details
 yargs.command({
     command: 'list',
-    describe: 'list down user details',
+    describe: 'List down all user details',
     handler() {
         db.listUser();
     }
@@ -64,7 +67,7 @@ yargs.command({
 //update user details
 yargs.command({
     command: 'update',
-    describe: 'update user details',
+    describe: 'Update user details',
     builder: {
         id: {
             describe: 'User name',
@@ -96,7 +99,7 @@ yargs.command({
 //remove user details
 yargs.command({
     command: 'remove',
-    describe: 'Read user Details',
+    describe: 'Read user details',
     builder: {
         id: {
             describe: 'User ID',
@@ -109,9 +112,6 @@ yargs.command({
         db.removeUser(argv.id);
     }
 });
-
-
-
 
 
 yargs.parse();

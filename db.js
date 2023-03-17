@@ -11,7 +11,7 @@ const addUser = (name, address, telno, visitDate) => {
     //auto assign id for each user
     const length = userData.length;
     let id = 1;
-    console.log(length);
+    
      if (length > 0) {
          id = userData[length - 1].id + 1;
      }
@@ -26,7 +26,7 @@ const addUser = (name, address, telno, visitDate) => {
     })
     saveUser(userData);
 
-    console.log(chalk.bgGreenBright('New user added sucsessfully....!'))
+    console.log(chalk.bgGreen.bold('   New user added sucsessfully....!    '))
 
 };
 
@@ -35,24 +35,24 @@ const readUser = (id) => {
     
     const users = loadUserData();
     const user = users.find((user) => {
-        return user.id === id;
+        return user.id == id;
     });
 
     if (user) {
-        console.log(chalk.yellow('User details of user ID:', id));
+        console.log(chalk.bgGreen.bold('  User details of userID:', id,'   '));
         console.log(user);
         
     } else {
-        console.log(chalk.bgRed('  User details not found...!  '));
+        console.log(chalk.bgRed.bold('  User details not found...!  '));
     };
 
 
     
 };
 
-//list user Details
+//list user details
 const listUser = () => {
-    console.log(chalk.magenta('List  user'))
+    console.log(chalk.bgGreen.bold('     List of all users..!     '))
 
     const user = loadUserData();
     user.forEach((user)=>{
@@ -62,7 +62,7 @@ const listUser = () => {
 
 };
 
-//update user Details
+//update user details
 const updateUser = (id,name, address, telno, visitDate) => {
     
 
@@ -78,11 +78,11 @@ const updateUser = (id,name, address, telno, visitDate) => {
         user.telno = telno ? telno : user.telno;
         user.visitDate = visitDate ? visitDate : user.visitDate;
 
-        console.log(chalk.cyan('Succsesfully Updated user:', id))
+        console.log(chalk.bgGreen.bold('   Succsesfully Updated user:', id,'   '))
         saveUser(userData);
     }
     else {
-        console.log(chalk.bgRed('  User details not found...!  '));
+        console.log(chalk.bgRed('   Update Faild: User details not found...!   '));
     }
 
     
@@ -100,9 +100,9 @@ const removeUser = (id) => {
 
     if(users.length > newUsers.length){
         saveUser(newUsers);
-        console.log(chalk.bgGreenBright('User details removed successfully...!'));
+        console.log(chalk.bgGreen.bold(' User details removed successfully...!   '));
     } else {
-        console.log(chalk.bgRed('  User details not found...!  '));
+        console.log(chalk.bgRed('  Failed to delete: User details not found...!  '));
     }
 
 };
